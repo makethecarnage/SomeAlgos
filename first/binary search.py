@@ -16,3 +16,10 @@ def binary_search(list,item):
             low = mid + 1
 
     return None
+
+if __name__ == '__main__':
+
+    list = [1,2,3,4,5]
+    item = 3
+
+    print(binary_search(list,item))
