@@ -1,21 +1,27 @@
 from collections import deque
 
-def search(name):
+def bfs (name):
 
     search_queue = deque()
     search_queue += graph[name]
     searched = set()
+    searched.add(name)
+    level = 0
 
     while search_queue:
+
+        level += 1
         person = search_queue.popleft()
-        if not person in searched:
-            if function_with_person(person):
-                return True
-            else:
-                search_queue += graph[person]
-                searched.append(person)
+
+        for neighbour in graph[person]:
+            if neighbour not in searched:
+                if function_with_person(neighbour):
+                    return level
+                searched.add(neighbour)
+                search_queue.append(neighbour)
 
     return False
+
 
 def function_with_person(name):
     return name == 'Alex'
@@ -24,5 +30,8 @@ def function_with_person(name):
 if __name__ == '__main__':
 
     graph = {}
-    search(name)
-
+    name = input()
+    if function_with_person(name):
+        print(0)
+    else:
+        search(name)
